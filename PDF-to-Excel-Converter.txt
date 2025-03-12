@@ -1,0 +1,53 @@
+Sub PDF_To_Excel()
+
+Dim setting_sh As Worksheet
+Set setting_sh = ThisWorkbook.Sheets("HOME")
+
+Dim pdf_path As String
+Dim excel_path As String
+
+pdf_path = setting_sh.Range("C5").Value
+excel_path = setting_sh.Range("C7").Value
+
+Dim fso As New FileSystemObject
+Dim fo As Folder
+Dim f As File
+
+Set fo = fso.GetFolder(pdf_path)
+
+Dim wa As Object
+Dim doc As Object
+Dim wr As Object
+
+Set wa = CreateObject("word.application")
+
+'Dim wa As New Word.Application
+wa.Visible = True
+'Dim doc As Word.Document
+
+Dim nwb As Workbook
+Dim nsh As Worksheet
+'Dim wr As Word.Range
+
+For Each f In fo.Files
+Set doc = wa.documents.Open(f.Path, False, Format:="PDF Files")
+Set wr = doc.Paragraphs(1).Range
+wr.WholeStory
+
+
+Set nwb = Workbooks.Add
+Set nsh = nwb.Sheets(1)
+wr.Copy
+
+nsh.Paste
+nwb.SaveAs (excel_path & "\" & Replace(f.Name, ".pdf", ".xlsx"))
+
+doc.Close False
+nwb.Close False
+Next
+
+wa.Quit
+
+MsgBox "Done By Tauheed Hasan"
+
+End Sub
