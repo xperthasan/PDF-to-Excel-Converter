@@ -3,7 +3,7 @@ The PDF to Excel Converter is a VBA (Visual Basic for Applications) script desig
 
 ![sample](https://github.com/user-attachments/assets/3b76f37d-e6b1-4fe4-91bd-959ed2b98cd8)
 # Features
-- Extracts table data from PDFs
+- Extracts data from PDFs
 - Converts it into structured Excel sheets
 - Fully written in VBA, no external dependencies
 # How to Use
